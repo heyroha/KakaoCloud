@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 바디태그 */
+body{
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* 메인 헤더 설정*/
+#main-header {
+    color: rgb(255, 255, 255);
+    text-align: center;   
+    background-image: url("https://i.pinimg.com/736x/e2/27/b2/e227b2f2e7375fe7fef4404e3d2fad0f.jpg");
+    background-size: cover;
+    padding: 20px 0;
+    height: 200px;
+}
+
+/* 클래스 선택자 */
+.header-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*자손 선택자*/
+.sidebar nav ul {
+    list-style: none;
+    padding: 10px;
+}
+
+.sidebar nav ul li a{
+    display: block;
+    padding: 10px;
+    color: white;
+    background-color: #ff3c3c;
+    text-decoration: none;
+    margin-bottom: 5px;
+    transition: background-color 0.3s;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #fca746;
+}
+
+/* 자식 선택자 */
+.signup-form{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffefd4;
+    border-radius: 5px;
+    margin: 0 auto;
+    width: 300px
+
+}
+
+/* 인접 형제 선택자 */
+.signup-form label + input {
+    margin-bottom: 10px;
+
+}
+
+/* 박스 모델 속성 */
+.signup-form input, .signup-form button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.signup-form button {
+    background-color: #f9b301;
+    width: 100%;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+.signup-form button:hover {
+    background-color: #ff8800;
+}
+
+/* CSS positoin */
+.sidebar {
+    position: absolute;
+    top: 220px;
+    left: 20px;
+    width: 200px;
+}
+
+/* 플렉스 레이아웃 */
+.main-container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    flex: 1;
+}
+
+/* 그리드 레이아웃 */
+.sidebar nav ul {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+/* 애니메이션 */
+button :hover {
+    animation: pulse 0.5s;
+}
+
+@keyframes pulse {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.1);}
+    100% {transform: scale(1);} 
+}
+
+footer {
+    text-align: center;
+    color: white;
+    background-color: #4c4c4c;
+    padding: 10px 0;
+    position: fixed;
+    bottom:0;
+    width: 100%;
+}
