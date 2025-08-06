@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang = "ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!--IE 호환성 설정, 최신 브라우저-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" href="favicon.ico" />
+    <title>HTML 시작하기</title>
+</head>
+<body>
+    <h1>사용자 등록 양식</h1>
+
+    <form action = "/submit-form" method = "POST">
+        <!--사용자 이름 입력-->
+        <label for = "username">사용자 이름:</label>
+        <input type = "text" id = "username" name = "username" placeholder = "사용자 이름 입력" maxlength = "20" required>
+        <br><br>
+
+        <!--이메일 입력-->
+        <label for = "email">이메일:</label>
+        <input type = "email" id = "email" name = "email" placeholder = "example@example.com" required>
+        <br><br>
+
+        <!--비밀번호 입력-->
+        <label for = "password">비밀번호:</label>
+        <input type = "password" id = "password" name = "password" placeholder = "비밀번호 입력" minlength = "8" required>
+        <br><br>
+
+        <!--나이 입력-->
+        <label for = "age">나이:</label>
+        <input type = "number" id = "age" name = "age" min = "1" max = "130" placeholder = "나이">
+        <br><br>
+
+        <!--성별 선택-->
+        <label>성별:</label>
+        <input type = "radio" id = "male" name = "sex" value = "male" required> 
+        <label for = "male">남성</label>
+        <input type = "radio" id = "female" name= "sex" value = "female">   
+        <label for = "female">여성</label>
+        <br><br>
+
+        <!--좋아하는 과일 선택-->
+        <!--name에 fruits[]를 하면 여러 개의 값 선택가능-->
+        <label for = "fruit">좋아하는 과일:</label>
+        <select id = "fruit" name = "fruits[]" required>
+            <optgroup label = "열대 과일">
+                <option value = "mango">망고</option>
+                <option value = "pineapple">파인애플</option>
+                <option value = "papaya">파파야</option>
+            </optgroup>
+            <optgroup label = "기타 과일">
+                <option value = "apple">사과</option>
+                <option value = "banana">바나나</option>
+            </optgroup>
+        </select>
+        <br><br>
+
+        <!--자기 소개-->
+        <label for = "bio">자기 소개:</label>
+        <textarea id = "bio" name = "bio" rows = "4" cols = "50" placeholder = "자기 소개를 입력하세요"></textarea>
+        <br><br>    
+
+        <!--파일 업로드-->
+        <label for = "profile-pic">프로필 사진 업로드:</label>
+        <input type = "file" id = "profile-pic" name = "profile-pic" accept = "image/*">
+        <br><br>
+
+        <!--작업 진행 상황-->
+        <label for = "upload-progress">업로드 진행 상황:</label>
+        <progress id = "upload-progress" value = "70" max = "100"></progress>
+        <br><br>
+
+        <!--양식 제출-->
+        <button type = "submit">제출</button>
+        <button type = "reset">초기화</button>
+        <br><br>
+    
+        
+    </form>
+</body>
+</html>
