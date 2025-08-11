@@ -1,5 +1,7 @@
-# JavaScript 실습
+# 📝JavaScript 실습
 
-## Making First Website
-- JavaScript Basic
-- 
+## 🔨Making First Website
+- Practice
+
+## ✍🏻JavaScript Basic
+
