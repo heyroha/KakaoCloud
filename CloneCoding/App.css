@@ -1,71 +1,155 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
+/*전역 태그*/
 * {
   box-sizing: border-box;
 }
+:root {
+  --swiper-navigation-size: 44px;
+}
 
 nav {
+  display: block;
   unicode-bidi: isolate;
 }
 
-body {
+body,
+span,
+nav,
+ul,
+div {
   margin: 0;
   padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-weight: 200;
   font-family: "Noto Sans", sans-serif;
-  color: #666;
+  font-size: 14px;
+  background: transparent;
+  line-height: 1.4em;
   -webkit-font-smoothing: antialiased;
 }
 
 div {
-  border: 0;
-  font-size: 100%;
   display: block;
-  unicode-bidi: isolate;
-  box-sizing: border-box;
-  font-weight: 200;
 }
 
-/* Header */
-.pc-header {
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  unicode-bidi: isolate;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+ul {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  padding-inline-start: 40px;
+  unicode-bidi: isolate;
+}
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+  unicode-bidi: isolate;
+}
+/*a tag*/
+a:link,
+a:visited,
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+/*띠 배너 영역*/
+.swiper.bandBannerWrap .swiper-slide {
+  background: #333;
+}
+
+.swiper.bandBannerWrap .swiper-slide {
+  font-size: 14px;
+}
+
+.swiper-slide {
+  float: left;
+  box-sizing: content-box;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.bandBannerWrap {
   position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.swiper.bandBannerWrap {
+  max-height: 40px;
+  overflow: hidden;
+  background-color: #808080;
+}
+.swiper.bandBannerWrap.on {
+  display: block;
+}
+.swiper {
+  margin-left: auto;
+  margin-right: auto;
+  list-style: none;
+}
+.bandbox {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+}
+.bandbox .bandcontent {
+  width: calc(100%-160px);
+  margin-left: 80px;
+  overflow: hidden;
+}
+
+.bandgrp {
+  padding: 0;
+  display: flex;
+  width: 100%;
+  height: 40px;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+.bandgrp .bandmbr {
+  width: 100%;
+  padding: 4px 0;
+  line-height: 32px;
+  text-align: center;
+}
+.bandBanerFontArea {
+  max-width: 1120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #ffffff;
+}
+.bandbox p {
+  display: inline;
+}
+/* 헤더 로고 */
+.headerWrap.bn0n {
+  position: fixed;
+  top: 40px;
+}
+
+.headerWrap {
   left: 0;
   width: 100%;
   display: flex;
@@ -76,17 +160,10 @@ div {
   background: rgba(33, 32, 30, 0);
   transition: background 0.3s ease, top 0.3s ease;
   min-width: 1400px;
-  z-index: 10;
-}
-.pc-header__inner {
-  height: var(--header-h);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
+  margin-left: 0px;
 }
 
-.pc-header h1 {
+.headerWrap h1 {
   margin: 17px 0 15px 36px;
   background: none;
   width: 213px;
@@ -95,23 +172,24 @@ div {
   font-size: 0;
 }
 
-.pc-header h1 a {
+.headerWrap h1 a {
   display: block;
   width: 236px;
   height: 30px;
   overflow: hidden;
   text-indent: -9999px;
-  background: url(/Users/apple/Documents/practice/pcity/src/components/Header/main_logo.svg)
-    no-repeat 0 0;
+  background: url(../public/main_logo.svg) no-repeat 0 0;
   background-size: 100% auto;
 }
+
+/*gnb*/
 .gnb {
   margin: 0 0 0 36px !important;
   float: left;
   position: relative;
 }
 
-.gnb ul {
+.gnb > ul {
   text-align: -webkit-match-parent;
   display: flex;
   gap: 24px;
@@ -121,14 +199,24 @@ div {
   box-sizing: border-box;
   list-style: none;
 }
-.gnb a {
+.gnb > ul > li {
+  margin-right: 33px;
+  position: relative;
+}
+
+.gnb ul > li > a {
   height: 44px;
   line-height: 24px;
   padding-top: 3px;
+  color: #fff;
   text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
   cursor: pointer;
   font-size: 14px;
-  color: #000000;
+  display: black;
+  position: relative;
+  text-transform: uppercase;
 }
 
 .reserve-btn {
@@ -140,7 +228,7 @@ div {
   cursor: pointer;
 }
 
-.pc-header .top-links .dropdown > a::after {
+.headerWrap.top-links .dropdown > a::after {
   content: "";
   display: block;
   position: absolute;
@@ -155,7 +243,7 @@ div {
   transform-origin: 50% 50% !important;
 }
 
-.pc-header .top-links .dropdown > a {
+.headerWrap .top-links .dropdown > a {
   display: inline-block;
   position: relative;
   padding: 0 36px 0 16px;
@@ -168,7 +256,7 @@ div {
   font-weight: 400;
 }
 
-.pc-header .top-links .dropdown > a::before {
+.headerWrap.top-links .dropdown > a::before {
   content: "";
   display: block;
   position: absolute;
@@ -180,23 +268,11 @@ div {
   background: rgba(255, 255, 255, 0.1);
   transform: translateY(-50%);
 }
-.pc-header .top-links .dropdown {
+.headerWrap.top-links .dropdown {
   font-size: 0;
 }
 
-ol,
-ul {
-  list-style: none;
-}
-
-ul {
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  padding-inline-start: 40px;
-  unicode-bidi: isolate;
-}
-
-.pc-header .top-links ul li {
+.headerWrap .top-links ul li {
   float: left;
   margin-left: 25px;
   display: flex !important;
@@ -204,13 +280,13 @@ ul {
   background: none;
 }
 
-.pc-header .top-links ul li a {
+.headerWrap .top-links ul li a {
   padding: 0;
   color: #433737;
   display: flex;
   font-weight: 300;
 }
-.pc-header .top-links {
+.headerWrap .top-links {
   display: flex; /* 가로 정렬 */
   flex-direction: row !important; /* 세로 덮어쓰기 방지 */
   align-items: center;
@@ -222,7 +298,7 @@ ul {
   margin-right: 16px;
 }
 
-.pc-header .top-links a {
+.headerWrap .top-links a {
   display: inline-block; /* 세로 쌓임 방지 */
   text-decoration: none;
   color: #333;
@@ -231,7 +307,7 @@ ul {
 
 /*예약하기 버튼*/
 
-.pc-header .top-links .offer a {
+.headerWrap .top-links .offer a {
   display: inline-flex;
   min-width: 100px;
   height: 40px;
