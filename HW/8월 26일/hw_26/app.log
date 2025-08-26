@@ -1,0 +1,41 @@
+2025-08-26 15:30:33,411 - root - DEBUG - Start data processing: ex.excel
+2025-08-26 15:33:17,221 - root - DEBUG - Start data processing: ex.excel
+2025-08-26 15:33:17,223 - root - WARNING - 파일을 찾을 수 없습니다.
+2025-08-26 15:38:12,629 - root - DEBUG - Start data processing: ex.excel
+2025-08-26 15:38:12,632 - root - WARNING - 파일을 찾을 수 없습니다.
+2025-08-26 15:38:12,633 - root - DEBUG - Start data processing: ex.bin
+2025-08-26 15:38:12,637 - root - DEBUG - Start data processing: ex_err.json
+2025-08-26 15:38:31,814 - root - DEBUG - Start data processing: ex.excel
+2025-08-26 15:38:31,815 - root - WARNING - 파일을 찾을 수 없습니다.
+2025-08-26 15:38:31,816 - root - DEBUG - Start data processing: ex.bin
+2025-08-26 15:38:31,817 - root - DEBUG - Start data processing: ex_err.json
+2025-08-26 15:38:41,387 - root - DEBUG - Start data processing: ex.excel
+2025-08-26 15:38:41,388 - root - WARNING - 파일을 찾을 수 없습니다.
+2025-08-26 15:38:41,388 - root - DEBUG - Start data processing: ex.bin
+2025-08-26 15:38:41,389 - root - DEBUG - Start data processing: ex_err.json
+2025-08-26 15:39:06,999 - root - DEBUG - Start data processing: ex.excel
+2025-08-26 15:39:07,000 - root - WARNING - 파일을 찾을 수 없습니다.
+2025-08-26 15:39:07,000 - root - DEBUG - Start data processing: ex.bin
+2025-08-26 15:39:07,001 - root - DEBUG - Start data processing: ex_err.bin
+2025-08-26 15:39:08,605 - root - DEBUG - Start data processing: ex.excel
+2025-08-26 15:39:08,606 - root - WARNING - 파일을 찾을 수 없습니다.
+2025-08-26 15:39:08,606 - root - DEBUG - Start data processing: ex.bin
+2025-08-26 15:39:08,606 - root - DEBUG - Start data processing: ex_err.bin
+2025-08-26 15:39:36,004 - root - DEBUG - Start data processing: ex.excel
+2025-08-26 15:39:36,005 - root - WARNING - 파일을 찾을 수 없습니다.
+2025-08-26 15:40:48,493 - root - DEBUG - Start data processing: ex.bin
+2025-08-26 15:54:23,077 - root - DEBUG - Start data processing: ex.excel
+2025-08-26 15:54:23,085 - root - ERROR - 파일을 찾을 수 없습니다.
+2025-08-26 15:54:23,086 - root - DEBUG - Start data processing: ex.bin
+2025-08-26 15:54:23,086 - root - ERROR - 파일에 대한 접근 권한이 없습니다.
+2025-08-26 15:54:23,086 - root - DEBUG - Start data processing: ex_err.bin
+2025-08-26 15:54:31,737 - root - DEBUG - Start data processing: ex.excel
+2025-08-26 15:54:31,738 - root - ERROR - 파일을 찾을 수 없습니다.
+2025-08-26 15:54:31,738 - root - DEBUG - Start data processing: ex.bin
+2025-08-26 15:54:31,739 - root - ERROR - 파일에 대한 접근 권한이 없습니다.
+2025-08-26 15:56:32,890 - root - DEBUG - Start data processing: ex.excel
+2025-08-26 15:56:32,892 - root - ERROR - 파일을 찾을 수 없습니다.
+2025-08-26 15:56:32,892 - root - DEBUG - Start data processing: ex.bin
+2025-08-26 15:56:32,892 - root - ERROR - 파일에 대한 접근 권한이 없습니다.
+2025-08-26 15:56:32,893 - root - DEBUG - Start data processing: euc_kr_example.txt
+2025-08-26 15:56:32,893 - root - ERROR - 텍스트 파일 인코딩이 올바르지 않습니다.
