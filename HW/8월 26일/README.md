@@ -1,2 +1,2 @@
-- > prac_26.ipynb, data.txt, app.log : 강의 예제 실습
-- >
+- prac_26.ipynb, data.txt, app.log : 강의 예제 실습
+- 
