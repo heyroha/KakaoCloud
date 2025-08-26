@@ -1,0 +1,8 @@
+2025-08-26 14:26:08,608 - root - WARNING - 딕셔너리가 아닌 데이터 수신: <class 'int'>
+2025-08-26 14:26:08,608 - root - WARNING - 딕셔너리가 아닌 데이터 수신: <class 'NoneType'>
+2025-08-26 14:26:08,609 - root - ERROR - 데이터 처리 중 오류 발생: unsupported operand type(s) for *: 'NoneType' and 'int'
+Traceback (most recent call last):
+  File "/var/folders/hs/81ncphtd2yzggndhp3qhjq400000gn/T/ipykernel_2658/1863677624.py", line 20, in process_data
+    result = data.get("value",0)*2
+             ~~~~~~~~~~~~~~~~~~~^~
+TypeError: unsupported operand type(s) for *: 'NoneType' and 'int'
