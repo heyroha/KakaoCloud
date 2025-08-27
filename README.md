@@ -6,3 +6,4 @@
 - 8월 27일: 동시성과 병렬처리 실험(순차, ThreadPoolExecutor, asyncio/aiohttp 비교 실험)
   
 ## 👩🏻‍💻CloneCoding: 클론 코딩 과제
+- 파라다이스 시티 웹페이지 클론 코딩
