@@ -1,0 +1,1 @@
+- **prac_9.ipynb, OpenAIChatbot.py**: OpenAIChatbot 모듈을 이용하여 함수호출, 대화관리, 에이전트 챗봇 실습 진행.
