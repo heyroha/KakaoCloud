@@ -68,8 +68,8 @@ export default function Footer() {
               aria-expanded={open}
               onClick={() => setOpen(!open)}
             >
-              Family site ::after{" "}
-              <span className="caret">{open ? "^" : "^"}</span>
+              Family site{" "}
+              <span className="caret">{open ? "▲" : "▼"}</span>
             </button>
             {open && (
               <ul className="family-list">

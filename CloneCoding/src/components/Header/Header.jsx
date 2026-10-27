@@ -27,7 +27,7 @@ export default function Header() {
       </div>
 
       {/*헤더 영역 */}
-      <header className="headerWrap" class="bn0n">
+      <header className="headerWrap bn0n">
         {/*파시티 메인 로고 */}
         <h1>
           <a href="https://www.p-city.com/front?language=KO">PARADISE CITY</a>
@@ -43,12 +43,12 @@ export default function Header() {
               </li>
             ))}
             <li className="apGnb">
-              ::before<a href="#!">art paradiso</a>
+              <a href="#!">art paradiso</a>
             </li>
           </ul>
         </nav>
 
-        <div className="topLink">
+        <div className="top-links">
           <div className="more">
             <ul>
               <li>
@@ -71,16 +71,14 @@ export default function Header() {
           </div>
 
           <div className="dropdown eshop">
-            ::before
-            <a href="#!">"E-SHOP" ::after</a>
+            <a href="#!">E-SHOP</a>
           </div>
 
           <div className="dropdown language">
-            ::before
-            <a href="#!">" KR "::after</a>
+            <a href="#!">KR</a>
           </div>
 
-          <div class="offer">
+          <div className="offer">
             <a href="#!" className="btn btnFull">
               예약하기
             </a>

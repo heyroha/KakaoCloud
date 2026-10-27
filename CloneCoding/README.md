@@ -2,8 +2,20 @@
 
 ## 🎠 Paradise City
 
-- public: 파비콘 및 홈페이지 아이콘 모음
-  
-- src: 컴포넌트 구성, Header, Main, Footer, SearchBar .jsx /.css파일 및 모음
+파라다이스시티 메인 페이지 클론 (Create React App + Swiper)
 
-- data: 전체 웹 구성 자바스크립트, css(nav.js, App.js, App.css, index.js)
+- public: index.html, manifest.json 등 정적 파일
+- src: 앱 진입점(index.js, App.js)과 전역 스타일(App.css)
+  - components: Header, Hero, SearchBar, Footer 컴포넌트(.jsx / .css)
+  - data: GNB 메뉴 데이터(nav.js)
+  - assets: 로고 등 이미지
+
+## 실행
+
+```bash
+npm install
+npm start
+```
+
+- `npm run build`: 배포용 빌드
+- `npm test`: 테스트 실행
