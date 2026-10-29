@@ -111,6 +111,72 @@ CloneCoding
 
 <br />
 
+## 📡 API 명세
+
+### `GET /api/slides`
+메인 비주얼 슬라이드 목록을 돌려줍니다.
+
+```json
+[
+  { "id": 1, "type": "image", "src": "https://.../1752744777561.png", "title": "", "sub": "조엘 메슬러의 감각적인 아트로 물든 트로피컬 서머!" },
+  { "id": 3, "type": "video", "src": "https://.../1745830105346.mp4", "title": "Special Offer", "sub": "Only this week" }
+]
+```
+
+### `POST /api/reservations/search`
+조건에 맞는 객실과 숙박 요금을 돌려줍니다.
+
+**Request**
+```json
+{ "hotel": "호텔 파라다이스", "checkIn": "2026-11-01", "checkOut": "2026-11-03", "adult": 2, "child": 1 }
+```
+
+**Response `200`**
+```json
+{
+  "nights": 2,
+  "rooms": [
+    { "id": "hp-family", "hotel": "호텔 파라다이스", "name": "디럭스 패밀리 트윈", "maxGuests": 4, "pricePerNight": 410000, "totalPrice": 820000 },
+    { "id": "hp-suite", "hotel": "호텔 파라다이스", "name": "프리미어 스위트", "maxGuests": 3, "pricePerNight": 780000, "totalPrice": 1560000 }
+  ]
+}
+```
+
+**Response `400`** — 입력값이 잘못된 경우
+```json
+{ "message": "체크아웃은 체크인 다음 날 이후여야 합니다." }
+```
+
+| 검증 항목 | 조건 |
+| --- | --- |
+| `hotel` | `HOTELS` 목록에 있는 호텔 |
+| `checkIn` · `checkOut` | `YYYY-MM-DD` 형식, 체크아웃이 체크인보다 뒤 |
+| `adult` | 1 이상의 정수 |
+| `child` | 0 이상의 정수 |
+
+<br />
+
+## 🔄 개발 과정
+
+1. **React 클론 (CRA)** — 원본 사이트의 HTML·CSS 구조를 참고해 Header · Hero · SearchBar · Footer를 컴포넌트로 나누고, Swiper로 메인 슬라이더를 구현했습니다.
+2. **TypeScript 전환** — 빌드 도구를 CRA에서 Vite로 바꾸고, 모든 컴포넌트를 `.tsx`로 옮겨 props · state · API 응답에 타입을 붙였습니다.
+3. **Node.js API 서버 추가** — 프런트에 하드코딩돼 있던 슬라이드 데이터와 `alert`로 끝나던 검색 기능을 Express API로 옮겨, 실제로 서버와 데이터를 주고받는 구조로 확장했습니다.
+4. **공용 타입 · 테스트** — `shared/types.ts`로 API 계약을 한 곳에서 관리하고, 서버(Supertest)와 화면(Testing Library) 테스트를 추가했습니다.
+
+<br />
+
+## 🧯 트러블슈팅
+
+| 문제 | 원인 | 해결 |
+| --- | --- | --- |
+| 헤더가 메인 슬라이더에 가려져 보이지 않음 | `position: fixed` 헤더에 `z-index`가 없어, DOM상 뒤에 오는 `#main`(`position: relative`)이 위에 그려짐 | `.headerWrap`에 `z-index` 지정 |
+| 슬라이더 무한 반복이 동작하지 않음 | Swiper 11의 `loop` 모드는 슬라이드 수가 적으면(3장) 비활성화됨 | 마지막 → 처음으로 되감는 `rewind` 옵션으로 변경 |
+| CRA 테스트에서 `swiper/react`를 찾지 못함 | Swiper 11은 ESM 전용 + package `exports` 사용, CRA의 Jest 27이 이를 해석하지 못함 | Vite + Vitest로 전환해 ESM을 그대로 사용 |
+| API 서버가 프런트와 같은 포트로 뜸 | 실행 환경이 넘겨준 `PORT=3000` 환경변수를 서버도 읽음 | 서버 포트를 `API_PORT`로 분리 (기본 4000) |
+| 서버가 꺼져 있을 때 `Unexpected end of JSON input` 에러 | 프록시가 빈 응답을 주어 `res.json()` 파싱 실패 | 파싱 실패 시 "서버에 연결할 수 없습니다" 메시지로 변환 |
+
+<br />
+
 ## 🚀 실행 방법
 
 ```bash
