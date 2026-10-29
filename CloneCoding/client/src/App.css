@@ -147,6 +147,7 @@ a {
 .headerWrap.bn0n {
   position: fixed;
   top: 40px;
+  z-index: 50; /* 뒤에 오는 #main(position: relative)에 가려지지 않게 */
 }
 
 .headerWrap {
@@ -237,10 +238,8 @@ a {
   width: 8px;
   height: 5px;
   margin-top: -3px !important;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 5px solid currentColor;
-  box-sizing: border-box;
+  background: url(./assets/drop_arrow.png) no-repeat 0 0 !important;
+  background-size: 100% !important;
   transform-origin: 50% 50% !important;
 }
 
@@ -362,12 +361,14 @@ a {
   font-size: clamp(28px, 5vw, 52px);
 }
 
-/* SearchBar */
+/* SearchBar: 메인 비주얼 하단에 띄워서 배치 */
 .searchbar {
-  background: #fff;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  width: min(1100px, calc(100% - 32px));
   z-index: 2;
-  margin-top: -60px;
 }
 .searchbar__grid {
   display: grid;
@@ -420,4 +421,53 @@ a {
   border: 0;
   font-weight: 700;
   cursor: pointer;
+}
+
+/* 검색 결과: 검색바 위로 띄우는 패널 */
+.search-result,
+.search-result__error {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 12px);
+  margin: 0;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid #eee;
+}
+.search-result__error {
+  color: #c0392b;
+}
+.search-result h3 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.search-result ul {
+  margin: 0;
+  padding: 0;
+}
+.search-result li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  border-top: 1px solid #f2f2f2;
+}
+.search-result .room-name {
+  flex: 1;
+}
+.search-result .room-guests {
+  color: #8a7d6a;
+  font-size: 12px;
+}
+.search-result .room-price {
+  font-weight: 700;
+}
+.hero__error {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #fff;
 }
