@@ -35,4 +35,23 @@ describe("POST /api/reservations/search", () => {
     const res = await request(app).post("/api/reservations/search").send({ ...valid, adult: 0 });
     expect(res.status).toBe(400);
   });
+
+  it.each(["2026-02-31", "2026-13-01", "2026-00-10"])("존재하지 않는 날짜(%s)는 400을 돌려준다", async (checkIn) => {
+    const res = await request(app).post("/api/reservations/search").send({ ...valid, checkIn });
+    expect(res.status).toBe(400);
+    expect(res.body.message).toMatch("체크인");
+  });
+
+  it("체크아웃이 존재하지 않는 날짜면 400을 돌려준다", async () => {
+    const res = await request(app).post("/api/reservations/search").send({ ...valid, checkOut: "2026-11-31" });
+    expect(res.status).toBe(400);
+  });
+
+  it("숙박 일수는 서머타임 등과 관계없이 달력 날짜 차이로 계산한다", async () => {
+    const res = await request(app)
+      .post("/api/reservations/search")
+      .send({ ...valid, checkIn: "2026-02-27", checkOut: "2026-03-02" });
+    expect(res.status).toBe(200);
+    expect(res.body.nights).toBe(3);
+  });
 });

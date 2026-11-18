@@ -11,5 +11,6 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: "./src/setupTests.ts",
+    env: { TZ: "Asia/Seoul" }, // 날짜 테스트가 실행 환경 시간대에 따라 달라지지 않도록 고정
   },
 });

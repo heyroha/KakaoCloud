@@ -6,6 +6,44 @@
 
 <br />
 
+## 📸 화면
+
+### 데스크톱 — 메인 비주얼 슬라이더 (`GET /api/slides`)
+
+<table>
+<tr>
+<td width="33%"><img src="docs/screenshots/01_main.jpg"/></td>
+<td width="33%"><img src="docs/screenshots/02_slide2.jpg"/></td>
+<td width="33%"><img src="docs/screenshots/03_slide_video.jpg"/></td>
+</tr>
+<tr>
+<td align="center"><sub>이미지 슬라이드</sub></td>
+<td align="center"><sub>타이틀이 있는 이미지 슬라이드</sub></td>
+<td align="center"><sub>영상(<code>type: "video"</code>) 슬라이드</sub></td>
+</tr>
+</table>
+
+### 데스크톱 — 객실 검색 (`POST /api/reservations/search`)
+
+<img src="docs/screenshots/04_search_result.jpg" width="820"/>
+
+호텔 파라다이스 · 12/24 ~ 12/26 · 성인 2 + 어린이 1 → 3인이 들어가는 객실만, 2박 총액과 함께 검색바 위 패널에 표시
+
+### 모바일 (390px)
+
+<table>
+<tr>
+<td align="center" width="50%"><img src="docs/screenshots/05_mobile_main.jpg" width="300"/></td>
+<td align="center" width="50%"><img src="docs/screenshots/06_mobile_search.jpg" width="300"/></td>
+</tr>
+<tr>
+<td align="center"><sub>메뉴는 가로 스크롤, 검색바는 슬라이더 아래 2열 배치</sub></td>
+<td align="center"><sub>검색 결과는 검색바 아래에 표시</sub></td>
+</tr>
+</table>
+
+<br />
+
 ## 🛠 기술 스택
 
 ### Frontend — `client/`
@@ -59,6 +97,7 @@
 ```
 CloneCoding
 ├── package.json                # 루트: workspaces 설정, dev/build/test 스크립트
+├── docs/screenshots            # README 스크린샷
 ├── shared
 │   └── types.ts                # client · server 공용 타입
 ├── server                      # Node.js + Express + TypeScript
@@ -101,7 +140,8 @@ CloneCoding
 
 ### 2. 객실 검색 (`SearchBar.tsx` ↔ `POST /api/reservations/search`)
 - 폼 전체를 `useState<SearchRequest>` 하나로 관리하고, 제네릭 `update<K extends keyof SearchRequest>`로 필드별 값 타입을 강제합니다.
-- 서버에서 입력값을 검증합니다: 존재하는 호텔인지, 날짜 형식이 맞는지, 체크아웃이 체크인보다 뒤인지, 인원 수가 올바른지. 잘못되면 `400`과 에러 메시지를 돌려줍니다.
+- 서버에서 입력값을 검증합니다: 존재하는 호텔인지, 달력에 있는 날짜인지(`2026-02-31` 같은 날짜 거부), 체크아웃이 체크인보다 뒤인지, 인원 수가 올바른지. 잘못되면 `400`과 에러 메시지를 돌려줍니다.
+- 화면에서도 날짜 입력에 `min`을 걸어 지난 날짜나 체크인 이전 체크아웃을 고를 수 없게 했습니다.
 - 통과하면 숙박 일수를 계산하고, 인원이 들어가는 객실만 골라 총 요금과 함께 돌려줍니다.
 - 화면에는 검색 중 상태, 결과 목록, 에러 메시지를 각각 표시합니다.
 
@@ -150,7 +190,7 @@ CloneCoding
 | 검증 항목 | 조건 |
 | --- | --- |
 | `hotel` | `HOTELS` 목록에 있는 호텔 |
-| `checkIn` · `checkOut` | `YYYY-MM-DD` 형식, 체크아웃이 체크인보다 뒤 |
+| `checkIn` · `checkOut` | `YYYY-MM-DD` 형식의 실제 달력 날짜, 체크아웃이 체크인보다 뒤 |
 | `adult` | 1 이상의 정수 |
 | `child` | 0 이상의 정수 |
 
@@ -174,6 +214,11 @@ CloneCoding
 | CRA 테스트에서 `swiper/react`를 찾지 못함 | Swiper 11은 ESM 전용 + package `exports` 사용, CRA의 Jest 27이 이를 해석하지 못함 | Vite + Vitest로 전환해 ESM을 그대로 사용 |
 | API 서버가 프런트와 같은 포트로 뜸 | 실행 환경이 넘겨준 `PORT=3000` 환경변수를 서버도 읽음 | 서버 포트를 `API_PORT`로 분리 (기본 4000) |
 | 서버가 꺼져 있을 때 `Unexpected end of JSON input` 에러 | 프록시가 빈 응답을 주어 `res.json()` 파싱 실패 | 파싱 실패 시 "서버에 연결할 수 없습니다" 메시지로 변환 |
+| `2026-02-31`이 3월 3일로 검색되고, `2026-13-01`은 `nights: NaN`·요금 `null`로 응답 | `Date.parse`가 없는 날짜를 다음 달로 넘기거나 `NaN`을 돌려주는데, `NaN <= NaN`이 `false`라 검증을 통과 | 연·월·일을 직접 확인하는 `toDayNumber()`로 검증하고 숙박 일수도 같은 함수로 계산 (테스트 추가) |
+| 한국 시간 오전 9시 전에는 기본 체크인이 '내일'이 아닌 '오늘'로 잡힘 | `toISOString()`이 UTC 날짜를 돌려줌 | 로컬 날짜로 `YYYY-MM-DD`를 만들도록 변경 (테스트 추가, 테스트 시간대 `Asia/Seoul` 고정) |
+| 검색 후 호텔을 바꾸면 결과 제목만 새 호텔로 바뀜 | 결과 제목이 검색 당시 값이 아닌 현재 폼 값을 읽음 | 검색 조건을 결과와 함께 저장 (테스트 추가) |
+| 휴대폰에서 검색바의 체크아웃·인원·검색 버튼이 화면 밖으로 잘려 검색 불가, 메뉴도 잘림 | 데스크톱 기준 레이아웃(헤더 `min-width: 1400px`, 5칸 그리드)만 있음 | 1024px 이하 미디어 쿼리 추가: 메뉴 가로 스크롤, 검색바 2열 배치 |
+| 스크롤하면 투명 헤더의 메뉴 글자가 검색 결과·푸터 위에 겹쳐 보임 | 배경 없는 헤더가 `position: fixed` | 슬라이더 위에만 얹히도록 `position: absolute`로 변경 |
 
 <br />
 

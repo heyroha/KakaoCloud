@@ -2,11 +2,13 @@ import { useState, type FormEvent } from "react";
 import { HOTELS, type Hotel, type SearchRequest, type SearchResult } from "../../../../shared/types";
 import { searchRooms } from "../../api/client";
 
-// 오늘 기준 n일 뒤 날짜를 YYYY-MM-DD 로
-function dateAfter(days: number): string {
-  const d = new Date();
+// 기준 날짜에서 n일 뒤를 로컬 날짜 YYYY-MM-DD 로.
+// toISOString() 은 UTC 라서 한국 시간 오전 9시 전에는 하루 이른 날짜가 나왔다.
+function dateAfter(days: number, from: Date | string = new Date()): string {
+  const d = typeof from === "string" ? new Date(`${from}T00:00:00`) : new Date(from);
   d.setDate(d.getDate() + days);
-  return d.toISOString().slice(0, 10);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 }
 
 export default function SearchBar() {
@@ -17,7 +19,8 @@ export default function SearchBar() {
     adult: 2,
     child: 0,
   });
-  const [result, setResult] = useState<SearchResult | null>(null);
+  // 결과와 함께 '검색한 조건'을 저장해, 검색 후 폼을 바꿔도 결과 제목이 바뀌지 않게 한다
+  const [result, setResult] = useState<{ query: SearchRequest; data: SearchResult } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -30,7 +33,8 @@ export default function SearchBar() {
     setLoading(true);
     setError(null);
     try {
-      setResult(await searchRooms(form));
+      const query = form;
+      setResult({ query, data: await searchRooms(query) });
     } catch (err) {
       setResult(null);
       setError((err as Error).message);
@@ -64,6 +68,7 @@ export default function SearchBar() {
             <input
               id="checkIn"
               type="date"
+              min={dateAfter(0)}
               value={form.checkIn}
               onChange={(e) => update("checkIn", e.target.value)}
             />
@@ -71,6 +76,7 @@ export default function SearchBar() {
             <input
               aria-label="체크아웃"
               type="date"
+              min={form.checkIn ? dateAfter(1, form.checkIn) : undefined}
               value={form.checkOut}
               onChange={(e) => update("checkOut", e.target.value)}
             />
@@ -114,13 +120,13 @@ export default function SearchBar() {
       {result && (
         <div className="search-result">
           <h3>
-            {form.hotel} · {result.nights}박 · 예약 가능 객실 {result.rooms.length}개
+            {result.query.hotel} · {result.data.nights}박 · 예약 가능 객실 {result.data.rooms.length}개
           </h3>
-          {result.rooms.length === 0 ? (
+          {result.data.rooms.length === 0 ? (
             <p>조건에 맞는 객실이 없습니다.</p>
           ) : (
             <ul>
-              {result.rooms.map((room) => (
+              {result.data.rooms.map((room) => (
                 <li key={room.id}>
                   <span className="room-name">{room.name}</span>
                   <span className="room-guests">최대 {room.maxGuests}인</span>
